@@ -1,0 +1,60 @@
+@use "./variables" as *;
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERY MIXINS
+
+/**
+ * RESPONSIVE BREAKPOINT SIZES ARE:
+
+ * phone - up to 600px
+ * tablet portrait - up to 900px
+ * tablet landscape - up to 1200 px
+ * default - (default) over 1200px
+ * big desktop - over 1800px
+
+ * STYLING ORDER
+ * base + typography > general layout: (header footer nav etc) + grid > page layout > components
+
+ * 
+ */
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      @content;
+    }
+  }
+  // large breakpoint : is default
+
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    @media (max-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
